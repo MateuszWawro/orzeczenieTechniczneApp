@@ -1,4 +1,5 @@
 from flask import render_template, flash, url_for, request, redirect
+from app import app
 
 
 ##widok strony głównej
