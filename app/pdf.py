@@ -1,13 +1,12 @@
+from io import BytesIO
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import A5
-from reportlab.lib.units import cm
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
+pdfmetrics.registerFont(TTFont('Vera', 'Vera.ttf'))
 
-#name pdf and define size of pdf
+buffer = BytesIO()
 canvas = Canvas("Plik_PDF", pagesize = A5)
-
-
-
-#save pdf file
-canvas.save()
+canvas.setFont("Vera", size=10)
 
