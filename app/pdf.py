@@ -4,11 +4,16 @@ import xlsxwriter
 
 def create_report(form=None):
 
+
+
+
    workbook = xlsxwriter.Workbook('Orzeczenie_Tech.xlsx')
+
    worksheet = workbook.add_worksheet()
    worksheet.set_landscape()
-   worksheet.write(0, 0, 'Zleceniodawca')
-   worksheet.write(0, 1, form.kom_orz.data)
+
+   worksheet.write('A1', 'Zleceniodawca')
+   worksheet.write('B1', form.kom_orz.data)
 
    worksheet.write(1, 0, 'Miejsce')
    worksheet.write(1, 1, form.komorka.data)
