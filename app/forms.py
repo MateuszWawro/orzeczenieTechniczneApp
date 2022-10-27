@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, FloatField, PasswordField, validators
+from wtforms import StringField, SubmitField, IntegerField, FloatField, PasswordField, validators, DecimalField
 
 
 class NewPredicate (FlaskForm):
@@ -7,6 +7,7 @@ class NewPredicate (FlaskForm):
     komorka = StringField('Komórka Zgłaszająca',[validators.DataRequired()])
     nazwa_urz = StringField('Nazwa Urządzenia',[validators.DataRequired()])
     typ = StringField('Typ')
+    rok = DecimalField('Rok Produkcji')
     lata = IntegerField('Lata Urzydkowania')
     cena = FloatField('Cena',[validators.DataRequired()])
     num_inw = StringField('Numer Inwentarzowy',[validators.DataRequired()])
