@@ -1,1 +1,1 @@
-# orzeczenieTechniczneApp aplikacja na mająca ułatwienie sobie pracy podczas wypełniania papierologi związanej z kasacją sprzętu dla potrzeb WSZ w Elblągu
+# orzeczenieTechniczneApp aplikacja mająca ułatwienie sobie pracy podczas wypełniania papierologi związanej z kasacją sprzętu dla potrzeb WSZ w Elblągu
