@@ -4,11 +4,13 @@ from app import app
 from .pdf import create_report
 
 
-##widok strony głównej
+
+#widok strony głównej
 @app.route('/')
 def home_page():
     return render_template("index.html", title='')
 
+#generowanie raportu
 @app.route('/form',  methods=['GET','POST'])
 def form_page():
     form = NewPredicate()

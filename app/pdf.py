@@ -11,6 +11,7 @@ def create_report(form=None):
    merge_bold = workbook.add_format({'align':'center','bold': True})
    merge_general = workbook.add_format({'align':'center'})
    merge_format = workbook.add_format({'align':'left','border': True})
+   merge_general_left = workbook.add_format({'align':'left'})
 
 #stworzenie arkusza w pliku xlsx
    worksheet = workbook.add_worksheet()
@@ -52,6 +53,25 @@ def create_report(form=None):
 
    worksheet.merge_range('H9:I9', 'Nazwa Urzadzenia' ,merge_format)
    worksheet.merge_range('J9:M9', form.nazwa_urz.data ,merge_format)
+
+
+
+
+
+
+
+#koniec arkusza
+#lewa strona
+   worksheet.merge_range('A26:B26', 'Zespół Orzekający:', merge_general_left)
+   worksheet.merge_range('A29:B29', '1 .........................', merge_general_left)
+   worksheet.merge_range('A33:B33', '2 .........................', merge_general_left)
+   worksheet.write('F26', 'Zatwierdzam')
+
+#prawa strona
+   worksheet.merge_range('H26:I26', 'Zespół Orzekający:', merge_general_left)
+   worksheet.merge_range('H29:I29', '1 .........................', merge_general_left)
+   worksheet.merge_range('H33:I33', '2 .........................', merge_general_left)
+   worksheet.write('M26', 'Zatwierdzam')
 
    workbook.close()
 
