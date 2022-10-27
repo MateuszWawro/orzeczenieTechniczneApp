@@ -12,11 +12,12 @@ def create_report(form=None):
    merge_bold = workbook.add_format({'align':'center','bold': True})
    merge_general = workbook.add_format({'align':'center'})
    merge_format = workbook.add_format({'align':'left','border': True})
+   merge_format_left = workbook.add_format({'align':'center', 'border' : True})
    merge_format.set_text_wrap()
    merge_format.set_align('top')
    merge_general_left = workbook.add_format({'align':'left'})
 
-#stworzenie arkusza w pliku xlsx
+#stworzenie arkusza w pliku xlsx i definicja ustawien
    worksheet = workbook.add_worksheet()
    worksheet.set_landscape()
    worksheet.set_margins(left=0.25, right=0.25)
@@ -27,15 +28,15 @@ def create_report(form=None):
 
 #stworzenie prezentacji danych na arkuszu
 #lewa strona tytuł
-   worksheet.merge_range('C1:E1', 'Wojwódzki Szpital Zespolony', merge_general)
+   worksheet.merge_range('C1:E1', 'Wojewódzki Szpital Zespolony', merge_general)
    worksheet.merge_range('C3:E3', 'Orzeczenie Techniczne', merge_bold)
 
    worksheet.write('A5', 'nr')
-   worksheet.write('B5', 'xx/yy')
+   worksheet.write('B5', form.numer_wniosku.data)
    worksheet.write('C5', 'Wystawione dnia {0}'.format(datetime.date.today()))
 
 #prawa strona tytuł
-   worksheet.merge_range('J1:L1', 'Wojwódzki Szpital Zespolony', merge_general)
+   worksheet.merge_range('J1:L1', 'Wojewódzki Szpital Zespolony', merge_general)
    worksheet.merge_range('J3:L3', 'Orzeczenie Techniczne', merge_bold)
 
    worksheet.write('H5', 'nr')
@@ -47,7 +48,7 @@ def create_report(form=None):
    worksheet.merge_range('C7:F7', form.kom_orz.data ,merge_bold_italic)
 
    worksheet.merge_range('A8:B8', 'Miejsce Użytkowania' ,merge_format)
-   worksheet.merge_range('C8:F8', form.komorka.data ,merge_format)
+   worksheet.merge_range('C8:F8', form.komorka.data , merge_format_left)
 
    worksheet.merge_range('A9:B9','Nazwa Urzadzenia',merge_format)
    worksheet.merge_range('C9:F9', form.nazwa_urz.data ,merge_bold_italic)
@@ -57,7 +58,7 @@ def create_report(form=None):
    worksheet.merge_range('J7:M7', form.kom_orz.data ,merge_bold_italic)
 
    worksheet.merge_range('H8:I8', 'Miejsce Użytkowania',merge_format)
-   worksheet.merge_range('J8:M8', form.komorka.data, merge_format)
+   worksheet.merge_range('J8:M8', form.komorka.data, merge_format_left)
 
    worksheet.merge_range('H9:I9', 'Nazwa Urzadzenia' ,merge_format)
    worksheet.merge_range('J9:M9', form.nazwa_urz.data ,merge_bold_italic)
@@ -70,7 +71,7 @@ def create_report(form=None):
    worksheet.set_column('C12:C12',12)
    worksheet.merge_range('A13:B13', 'c) rok produkcji', merge_format)
    worksheet.write('C13', form.rok.data, merge_bold_italic)
-   worksheet.merge_range('A14:B14', 'e) czas ekslpoatacji', merge_format)
+   worksheet.merge_range('A14:B14', 'e) czas eksploatacji', merge_format)
    worksheet.write('C14', form.lata.data, merge_bold_italic)
    worksheet.merge_range('A15:B15', 'g) wartość księgowa', merge_format)
    worksheet.write('C15', form.cena.data, merge_bold_italic)
@@ -94,7 +95,7 @@ def create_report(form=None):
    worksheet.set_column('J12:J12',12)
    worksheet.merge_range('H13:I13', 'c) rok produkcji', merge_format)
    worksheet.write('J13', form.rok.data, merge_bold_italic)
-   worksheet.merge_range('H14:I14', 'e) czas ekslpoatacji', merge_format)
+   worksheet.merge_range('H14:I14', 'e) czas eksploatacji', merge_format)
    worksheet.write('J14', form.lata.data, merge_bold_italic)
    worksheet.merge_range('H15:I15', 'g) wartość księgowa', merge_format)
    worksheet.write('J15', form.cena.data, merge_bold_italic)
@@ -118,6 +119,13 @@ def create_report(form=None):
    worksheet.merge_range('H17:M17', 'Opis Stanu Technicznego', merge_format)
 
    worksheet.merge_range('H18:M20', form.opis.data, merge_format)
+
+#uwagi i wnioski(obie strony)
+   worksheet.merge_range('A22:F22','Uwagi i wnioski', merge_format )
+   worksheet.merge_range('A23:F23', 'Proszę o zgodę na skasowanie ww. sprzętu', merge_format)
+
+   worksheet.merge_range('H22:M22','Uwagi i wnioski', merge_format )
+   worksheet.merge_range('H23:M23', 'Proszę o zgodę na skasowanie ww. sprzętu', merge_format)
 
 #koniec arkusza
 #lewa strona
