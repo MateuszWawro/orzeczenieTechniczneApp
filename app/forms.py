@@ -3,8 +3,8 @@ from wtforms import StringField, SubmitField, IntegerField, FloatField, Password
 
 
 class NewPredicate (FlaskForm):
-    komorka = StringField('Komórka Organizacyjna',[validators.DataRequired()])
-    kom_orz = StringField('Komórka Zgłaszająca',[validators.DataRequired()])
+    kom_orz = StringField('Komórka Organizacyjna',[validators.DataRequired()])
+    komorka = StringField('Komórka Zgłaszająca',[validators.DataRequired()])
     nazwa_urz = StringField('Nazwa Urządzenia',[validators.DataRequired()])
     typ = StringField('Typ')
     lata = IntegerField('Lata Urzydkowania')

@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
-from contextlib import suppress
 
 app = Flask(__name__)
 
