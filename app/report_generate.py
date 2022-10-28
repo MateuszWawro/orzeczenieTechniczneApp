@@ -17,6 +17,10 @@ def create_report(form=None):
    footer.set_align('right')
    footer.set_font_name('Courier New')
 
+   left = workbook.add_format({'align': 'left'})
+   left.set_font_size(10)
+   left.set_font_name('Tahoma')
+
    right = workbook.add_format({'align':'right'})
    right.set_font_size(11.5)
    right.set_font_name('Tahoma')
@@ -63,7 +67,7 @@ def create_report(form=None):
 #stworzenie prezentacji danych na arkuszu
 #lewa strona tytuł
    worksheet.merge_range('C1:E1', 'Wojewódzki Szpital Zespolony', merge_general)
-   worksheet.merge_range('C3:E3', 'Orzeczenie Techniczne', merge_bold)
+   worksheet.merge_range('C3:E3', 'ORZECZENIE TECHNICZNE', merge_bold)
 
    worksheet.write('A5', 'nr', right)
    worksheet.write('B5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year), center)
@@ -71,7 +75,7 @@ def create_report(form=None):
 
 #prawa strona tytuł
    worksheet.merge_range('J1:L1', 'Wojewódzki Szpital Zespolony', merge_general)
-   worksheet.merge_range('J3:L3', 'Orzeczenie Techniczne', merge_bold)
+   worksheet.merge_range('J3:L3', 'ORZECZENIE TECHNICZNE', merge_bold)
 
    worksheet.write('H5', 'nr', right)
    worksheet.write('I5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year), center)
@@ -111,7 +115,7 @@ def create_report(form=None):
    worksheet.write('C15', form.cena.data, merge_bold_italic)
 
    worksheet.merge_range('D12:E12', 'b) nr fab.', merge_format)
-   worksheet.set_column('D12:E12',6.5)
+   worksheet.set_column('D12:E12',8)
    worksheet.write('F12', form.num_fab.data, merge_bold_italic)
    worksheet.set_column('F12:F12',20)
    worksheet.merge_range('D13:E13', 'd) nr inw.', merge_format)
@@ -134,7 +138,7 @@ def create_report(form=None):
    worksheet.merge_range('H15:I15', 'g) wartość księgowa', merge_format)
    worksheet.write('J15', form.cena.data, merge_bold_italic)
    worksheet.merge_range('K12:L12', 'b) nr fab.', merge_format)
-   worksheet.set_column('K12:L12',6.5)
+   worksheet.set_column('K12:L12',8)
    worksheet.write('M12', form.num_fab.data, merge_bold_italic)
    worksheet.set_column('M12:M12',20)
    worksheet.merge_range('K13:L13', 'd) nr inw.', merge_format)
@@ -166,13 +170,13 @@ def create_report(form=None):
    worksheet.merge_range('A25:B25', 'Zespół Orzekający:', merge_general_left)
    worksheet.merge_range('A29:B29', '1 ......................................', merge_general_left)
    worksheet.merge_range('A33:B33', '2 ......................................', merge_general_left)
-   worksheet.write('E25', 'Zatwierdzam')
+   worksheet.write('F25', 'Zatwierdzam', left)
 
 #prawa strona
    worksheet.merge_range('H25:I25', 'Zespół Orzekający:', merge_general_left)
    worksheet.merge_range('H29:I29', '1 ......................................', merge_general_left)
    worksheet.merge_range('H33:I33', '2 ......................................', merge_general_left)
-   worksheet.write('L25', 'Zatwierdzam')
+   worksheet.write('M25', 'Zatwierdzam', left)
 
 
 #a'la stopka lewa i prawa strona
