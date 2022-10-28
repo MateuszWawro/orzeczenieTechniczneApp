@@ -3,9 +3,13 @@ import datetime
 import xlsxwriter
 
 
+
 def create_report(form=None):
+
+   output = BytesIO()
+
 #stworzenie pliku xlsx
-   workbook = xlsxwriter.Workbook('Orzeczenie_Tech.xlsx')
+   workbook = xlsxwriter.Workbook(output)
 
 #cell definitions
    right = workbook.add_format({'align':'right'})
@@ -143,3 +147,5 @@ def create_report(form=None):
 
 #koniec dokumentu
    workbook.close()
+   output.seek(0)
+   return output
