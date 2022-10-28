@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, FloatField, PasswordField, validators, DecimalField
+from wtforms import StringField, SubmitField, IntegerField, FloatField, PasswordField, validators, DecimalField, TextAreaField
 
 #klasa formularza
 class NewPredicate (FlaskForm):
@@ -15,7 +15,7 @@ class NewPredicate (FlaskForm):
     producent = StringField('Producent',[validators.DataRequired()])
     amortyzacja = StringField('Amortyzacja',[validators.DataRequired()])
     num_fab = StringField('Numer Fabryczny')
-    opis = StringField('Opis Stanu Technicznego',[validators.DataRequired()])
+    opis = TextAreaField('Opis Stanu Technicznego',[validators.DataRequired()])
     generate = SubmitField('Generuj')
 
 

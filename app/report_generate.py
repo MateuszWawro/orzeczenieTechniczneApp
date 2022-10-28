@@ -8,6 +8,7 @@ def create_report(form=None):
    workbook = xlsxwriter.Workbook('Orzeczenie_Tech.xlsx')
 
 #cell definitions
+   right = workbook.add_format({'align':'right'})
    merge_bold_italic = workbook.add_format({'align':'center','bold': True, 'italic' : True, 'border' : True })
    merge_bold = workbook.add_format({'align':'center','bold': True})
    merge_general = workbook.add_format({'align':'center'})
@@ -31,17 +32,17 @@ def create_report(form=None):
    worksheet.merge_range('C1:E1', 'Wojewódzki Szpital Zespolony', merge_general)
    worksheet.merge_range('C3:E3', 'Orzeczenie Techniczne', merge_bold)
 
-   worksheet.write('A5', 'nr')
+   worksheet.write('A5', 'nr', right)
    worksheet.write('B5', form.numer_wniosku.data)
-   worksheet.write('C5', 'Wystawione dnia {0}'.format(datetime.date.today()))
+   worksheet.merge_range('C5:F5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
 
 #prawa strona tytuł
    worksheet.merge_range('J1:L1', 'Wojewódzki Szpital Zespolony', merge_general)
    worksheet.merge_range('J3:L3', 'Orzeczenie Techniczne', merge_bold)
 
-   worksheet.write('H5', 'nr')
-   worksheet.write('I5', 'xx/yy')
-   worksheet.write('J5', 'Wystawione dnia {0}'.format(datetime.date.today()))
+   worksheet.write('H5', 'nr', right)
+   worksheet.write('I5', form.numer_wniosku.data)
+   worksheet.merge_range('J5:M5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
 
 #lewa strona dane (1 zestaw tabel)
    worksheet.merge_range('A7:B7', 'Zleceniodawca' ,merge_format,)
@@ -142,7 +143,3 @@ def create_report(form=None):
 
 #koniec dokumentu
    workbook.close()
-
-
-
-

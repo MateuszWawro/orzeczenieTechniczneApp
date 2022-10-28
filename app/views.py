@@ -1,7 +1,7 @@
 from flask import render_template, flash, url_for, request, redirect
 from .forms import NewPredicate
 from app import app
-from .pdf import create_report
+from .report_generate import create_report
 
 
 
