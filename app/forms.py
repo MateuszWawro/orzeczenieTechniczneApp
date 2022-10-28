@@ -20,7 +20,8 @@ class NewPredicate (FlaskForm):
 
 #klasa formularza logowania
 class LoginForm(FlaskForm):
-    login = StringField('Login', [validators.DataRequired])
-    password = StringField('Hasło',[validators.DataRequired])
+    login = StringField('Login', [validators.DataRequired()])
+    password = StringField('Hasło',[validators.DataRequired()])
+    submit = SubmitField('Zaloguj')
 
-    
+
