@@ -184,7 +184,6 @@ def create_report(form=None):
                                                                            current_user.surname), footer)
    worksheet.merge_range('K33:M33', 'Wygenerowano dnia {0} przez {1} {2}'.format(datetime.date.today(), current_user.name,
                                                                            current_user.surname), footer)
-
 #koniec dokumentu
    workbook.close()
    output.seek(0)
