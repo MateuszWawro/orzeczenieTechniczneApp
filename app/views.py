@@ -3,7 +3,7 @@ from .forms import NewPredicate
 from app import app
 from .report_generate import create_report
 from flask import send_file
-
+import datetime
 
 
 #widok strony głównej
@@ -16,7 +16,7 @@ def home_page():
 def form_page():
     form = NewPredicate()
     if form.validate_on_submit():
-        return send_file(create_report(form=form), download_name='orzeczenie.xlsx', as_attachment=True,
+       return send_file(create_report(form=form), download_name='{0}#{3}_{1}_{2}.xlsx'.format(form.numer_wniosku.data, form.nazwa_urz.data, str(form.num_inw.data).replace('/', '#'), datetime.date.today().year), as_attachment=True,
                          mimetype='application/vnd.ms-excel')
     else:
         print(form.errors)
