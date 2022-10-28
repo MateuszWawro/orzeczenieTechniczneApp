@@ -15,29 +15,41 @@ def create_report(form=None):
    footer = workbook.add_format()
    footer.set_font_size(4)
    footer.set_align('right')
+   footer.set_font_name('Courier New')
 
    right = workbook.add_format({'align':'right'})
+   right.set_font_size(11.5)
+   right.set_font_name('Tahoma')
+
+   center = workbook.add_format({'align':'center'})
+   center.set_font_size(11.5)
+   center.set_font_name('Tahoma')
 
    merge_bold_italic = workbook.add_format({'align':'center','bold': True, 'italic' : True, 'border' : True })
    merge_bold_italic.set_font_size(10)
+   merge_bold_italic.set_font_name('Tahoma')
 
    merge_bold = workbook.add_format({'align':'center','bold': True})
    merge_bold.set_font_size(11.5)
+   merge_bold.set_font_name('Tahoma')
 
    merge_general = workbook.add_format({'align':'center'})
    merge_general.set_font_size(11.5)
+   merge_general.set_font_name('Tahoma')
 
    merge_format = workbook.add_format({'align':'left','border': True})
    merge_format.set_font_size(10)
-
-   merge_format_left = workbook.add_format({'align':'center', 'border' : True})
-   merge_format_left.set_font_size(10)
-
+   merge_format.set_font_name('Tahoma')
    merge_format.set_text_wrap()
    merge_format.set_align('top')
 
+   merge_format_left = workbook.add_format({'align':'center', 'border' : True})
+   merge_format_left.set_font_size(10)
+   merge_format_left.set_font_name('Tahoma')
+
    merge_general_left = workbook.add_format({'align':'left'})
    merge_general_left.set_font_size(10)
+   merge_general_left.set_font_name('Tahoma')
 
 #stworzenie arkusza w pliku xlsx i definicja ustawien
    worksheet = workbook.add_worksheet()
@@ -54,7 +66,7 @@ def create_report(form=None):
    worksheet.merge_range('C3:E3', 'Orzeczenie Techniczne', merge_bold)
 
    worksheet.write('A5', 'nr', right)
-   worksheet.write('B5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year))
+   worksheet.write('B5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year), center)
    worksheet.merge_range('C5:F5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
 
 #prawa strona tytuł
@@ -62,7 +74,7 @@ def create_report(form=None):
    worksheet.merge_range('J3:L3', 'Orzeczenie Techniczne', merge_bold)
 
    worksheet.write('H5', 'nr', right)
-   worksheet.write('I5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year))
+   worksheet.write('I5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year), center)
    worksheet.merge_range('J5:M5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
 
 #lewa strona dane (1 zestaw tabel)
