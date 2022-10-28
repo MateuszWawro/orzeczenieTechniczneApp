@@ -12,15 +12,32 @@ def create_report(form=None):
    workbook = xlsxwriter.Workbook(output)
 
 #cell definitions
+   footer = workbook.add_format()
+   footer.set_font_size(4)
+   footer.set_align('right')
+
    right = workbook.add_format({'align':'right'})
+
    merge_bold_italic = workbook.add_format({'align':'center','bold': True, 'italic' : True, 'border' : True })
+   merge_bold_italic.set_font_size(10)
+
    merge_bold = workbook.add_format({'align':'center','bold': True})
+   merge_bold.set_font_size(11.5)
+
    merge_general = workbook.add_format({'align':'center'})
+   merge_general.set_font_size(11.5)
+
    merge_format = workbook.add_format({'align':'left','border': True})
+   merge_format.set_font_size(10)
+
    merge_format_left = workbook.add_format({'align':'center', 'border' : True})
+   merge_format_left.set_font_size(10)
+
    merge_format.set_text_wrap()
    merge_format.set_align('top')
+
    merge_general_left = workbook.add_format({'align':'left'})
+   merge_general_left.set_font_size(10)
 
 #stworzenie arkusza w pliku xlsx i definicja ustawien
    worksheet = workbook.add_worksheet()
@@ -134,16 +151,23 @@ def create_report(form=None):
 
 #koniec arkusza
 #lewa strona
-   worksheet.merge_range('A26:B26', 'Zespół Orzekający:', merge_general_left)
-   worksheet.merge_range('A29:B29', '1 .........................', merge_general_left)
-   worksheet.merge_range('A33:B33', '2 .........................', merge_general_left)
-   worksheet.write('E26', 'Zatwierdzam')
+   worksheet.merge_range('A25:B25', 'Zespół Orzekający:', merge_general_left)
+   worksheet.merge_range('A29:B29', '1 ......................................', merge_general_left)
+   worksheet.merge_range('A33:B33', '2 ......................................', merge_general_left)
+   worksheet.write('E25', 'Zatwierdzam')
 
 #prawa strona
-   worksheet.merge_range('H26:I26', 'Zespół Orzekający:', merge_general_left)
-   worksheet.merge_range('H29:I29', '1 .........................', merge_general_left)
-   worksheet.merge_range('H33:I33', '2 .........................', merge_general_left)
-   worksheet.write('L26', 'Zatwierdzam')
+   worksheet.merge_range('H25:I25', 'Zespół Orzekający:', merge_general_left)
+   worksheet.merge_range('H29:I29', '1 ......................................', merge_general_left)
+   worksheet.merge_range('H33:I33', '2 ......................................', merge_general_left)
+   worksheet.write('L25', 'Zatwierdzam')
+
+
+#a'la stopka lewa i prawa strona
+   worksheet.merge_range('D33:F33', 'Wygenerowano dnia {0} przez {1} {2}'.format(datetime.date.today(),current_user.name ,
+                                                                           current_user.surname), footer)
+   worksheet.merge_range('K33:M33', 'Wygenerowano dnia {0} przez {1} {2}'.format(datetime.date.today(), current_user.name,
+                                                                           current_user.surname), footer)
 
 #koniec dokumentu
    workbook.close()
