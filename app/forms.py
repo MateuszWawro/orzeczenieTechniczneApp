@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, FloatField, PasswordField, validators, DecimalField
 
-
+#klasa formularza
 class NewPredicate (FlaskForm):
     numer_wniosku = StringField('Numer Wniosku')
     kom_orz = StringField('Komórka Organizacyjna',[validators.DataRequired()])
