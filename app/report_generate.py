@@ -33,7 +33,7 @@ def create_report(form=None):
    worksheet.merge_range('C3:E3', 'Orzeczenie Techniczne', merge_bold)
 
    worksheet.write('A5', 'nr', right)
-   worksheet.write('B5', form.numer_wniosku.data)
+   worksheet.write('B5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year))
    worksheet.merge_range('C5:F5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
 
 #prawa strona tytuł
@@ -41,7 +41,7 @@ def create_report(form=None):
    worksheet.merge_range('J3:L3', 'Orzeczenie Techniczne', merge_bold)
 
    worksheet.write('H5', 'nr', right)
-   worksheet.write('I5', form.numer_wniosku.data)
+   worksheet.write('I5', '{0}/{1}'.format(form.numer_wniosku.data, datetime.date.today().year))
    worksheet.merge_range('J5:M5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
 
 #lewa strona dane (1 zestaw tabel)
