@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class = "container">
+    <div class="row">
+        <table class = "table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>
+                    numer wniosku
+                </th>
+                <th>
+                    nazwa urządzenia
+                </th>
+                <th>
+                    numer inwentarzowy
+                </th>
+                <th>
+                    Akcja
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in lista_orzecz %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.nazwa_urz}}</td>
+                <td>{{i.num_inw}}</td>
+                <td> <a href="/generate/{{i.id}}" class="btn btn-outline-success btn-sm" role="button" aria-pressed="true">Generuj Orzeczenie</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class
+</body>
+</html>

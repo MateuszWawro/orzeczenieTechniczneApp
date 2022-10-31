@@ -1,10 +1,10 @@
 from flask import render_template, flash, url_for, request, redirect
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 from sqlalchemy.exc import DBAPIError
 from .forms import NewPredicate, LoginForm
 from .models import User, Orzeczenie
 from app import app, db, lm
-from .report_generate import create_report
+from .report_generate import create_report, generate_report
 from flask import send_file
 import datetime
 from passlib.hash import bcrypt_sha256
@@ -16,7 +16,8 @@ def home_page():
     return render_template("index.html", title='')
 
 
-#generowanie raportu
+#generowanie raportu i dodanie do bazy danych
+@login_required
 @app.route('/form',  methods=['GET','POST'])
 def form_page():
     form = NewPredicate()
@@ -64,7 +65,28 @@ def load_user(user_id):
 
 
 #wylogowywanie
+@login_required
 @app.route('/logout')
 def view_logout():
     logout_user()
     return redirect(url_for('home_page'))
+
+
+#lista orzeczeń
+@login_required
+@app.route('/lista_orz')
+def view_lista():
+    lista_orzecz = Orzeczenie.query.all()
+    return render_template("lista_orzeczen.html", title="Lista Orzeczeń - zalogowano jako:{0}".format(current_user.name), lista_orzecz=lista_orzecz)
+
+
+#generacja/podglad z listy
+@login_required
+@app.route("/generate/<int:id>", methods=["POST", "GET"])
+def view_generate(id):
+    lista_orzecz = Orzeczenie.query.filter_by(id=id).first()
+    return send_file(generate_report(lista_query=lista_orzecz),
+                     download_name='{0}#{3}_{1}_{2}.xlsx'.format(lista_orzecz.id, lista_orzecz.nazwa_urz,
+                                                                 str(lista_orzecz.num_inw).replace('/', '#'),
+                                                                 datetime.date.today().year), as_attachment=True,
+                     mimetype='application/vnd.ms-excel')
