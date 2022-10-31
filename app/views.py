@@ -8,6 +8,7 @@ from .report_generate import create_report, generate_report
 from flask import send_file
 import datetime
 from passlib.hash import bcrypt_sha256
+from sqlalchemy import func
 
 
 #widok strony głównej
@@ -21,6 +22,7 @@ def home_page():
 @app.route('/form',  methods=['GET','POST'])
 def form_page():
     form = NewPredicate()
+    max_numer = db.session.query(func.max(Orzeczenie.id))
     if form.validate_on_submit():
         try:
             q = Orzeczenie(id=form.numer_wniosku.data, kom_orz=form.kom_orz.data, komorka=form.komorka.data,
@@ -38,7 +40,7 @@ def form_page():
                          mimetype='application/vnd.ms-excel')
     else:
         flash(form.errors)
-    return render_template("formularz.html", title="", form=form)
+    return render_template("formularz.html", title="", form=form, max_numer=max_numer)
 
 
 #formularz logowania
