@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, FloatField, PasswordField, validators, DecimalField, TextAreaField
 
+
 #klasa formularza orzeczenia
 class NewPredicate (FlaskForm):
     numer_wniosku = StringField('Numer Wniosku')
@@ -8,7 +9,7 @@ class NewPredicate (FlaskForm):
     komorka = StringField('Komórka Zgłaszająca',[validators.DataRequired()])
     nazwa_urz = StringField('Nazwa Urządzenia',[validators.DataRequired()])
     typ = StringField('Typ')
-    rok = DecimalField('Rok Produkcji')
+    rok = IntegerField('Rok Produkcji')
     lata = StringField('Lata Urzydkowania')
     cena = StringField('Cena',[validators.DataRequired()])
     num_inw = StringField('Numer Inwentarzowy',[validators.DataRequired()])
@@ -17,6 +18,7 @@ class NewPredicate (FlaskForm):
     num_fab = StringField('Numer Fabryczny')
     opis = TextAreaField('Opis Stanu Technicznego',[validators.DataRequired()])
     generate = SubmitField('Generuj')
+
 
 #klasa formularza logowania
 class LoginForm(FlaskForm):

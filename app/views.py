@@ -2,7 +2,7 @@ from flask import render_template, flash, url_for, request, redirect
 from flask_login import login_user, logout_user, current_user
 from sqlalchemy.exc import DBAPIError
 from .forms import NewPredicate, LoginForm
-from .models import User
+from .models import User, Orzeczenie
 from app import app, db, lm
 from .report_generate import create_report
 from flask import send_file
@@ -15,16 +15,30 @@ from passlib.hash import bcrypt_sha256
 def home_page():
     return render_template("index.html", title='')
 
+
 #generowanie raportu
 @app.route('/form',  methods=['GET','POST'])
 def form_page():
     form = NewPredicate()
     if form.validate_on_submit():
-       return send_file(create_report(form=form), download_name='{0}#{3}_{1}_{2}.xlsx'.format(form.numer_wniosku.data, form.nazwa_urz.data, str(form.num_inw.data).replace('/', '#'), datetime.date.today().year), as_attachment=True,
+        try:
+            q = Orzeczenie(id=form.numer_wniosku.data, kom_orz=form.kom_orz.data, komorka=form.komorka.data,
+                       nazwa_urz=form.nazwa_urz.data, typ=form.typ.data, rok=form.rok.data, lata=form.lata.data,
+                       cena=form.cena.data, num_inw=form.num_inw.data, producent=form.producent.data,
+                       amortyzacja=form.amortyzacja.data,
+                       num_fab=form.num_fab.data, opis=form.opis.data)
+            db.session.add(q)
+        except DBAPIError as e:
+            flash(e.detail)
+            db.session.rollback()
+        else:
+            db.session.commit()
+            return send_file(create_report(form=form), download_name='{0}#{3}_{1}_{2}.xlsx'.format(form.numer_wniosku.data, form.nazwa_urz.data, str(form.num_inw.data).replace('/', '#'), datetime.date.today().year), as_attachment=True,
                          mimetype='application/vnd.ms-excel')
     else:
-        print(form.errors)
+        flash(form.errors)
     return render_template("formularz.html", title="", form=form)
+
 
 #formularz logowania
 @app.route('/login', methods =['GET', 'POST'])
@@ -42,6 +56,7 @@ def view_login():
         flash('złe hasło lub login')
         return redirect(url_for('home_page'))
     return render_template("login_form.html", title="", form=form)
+
 
 @lm.user_loader
 def load_user(user_id):

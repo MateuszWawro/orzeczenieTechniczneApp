@@ -13,7 +13,7 @@ class User (db.Model, UserMixin):
 
 #model bazy danych orzeczeń
 class Orzeczenie(db.Model):
-    id =db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     kom_orz = db.Column(db.String())
     komorka = db.Column(db.String())
     nazwa_urz = db.Column(db.String())
