@@ -10,13 +10,15 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<div class = "row">
-    <form class = "col-lg-6 offset-lg-3", method ="post">
-        {{form.csrf_token}}
-        <div class = "form-group">{{form.login(placeholder="login", class="form-control")}}</div>
-        <div class = "form-group">{{form.password(placeholder="hasło",class="form-control")}} </div>
-        <div class = "form-group">{{form.submit(class="btn btn-success")}}</div>
-    </form>
+<div class ="container">
+    <div class = "flex row m-5">
+        <form class = "col-lg-2 offset-lg-5", method ="post">
+            {{form.csrf_token}}
+            <div class = "form-group">{{form.login(placeholder="login", class="form-control")}}</div>
+            <div class = "form-group">{{form.password(placeholder="hasło",class="form-control")}} </div>
+            <div class = "form-group">{{form.submit(class="btn btn-success btn-sm form-control ")}}</div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
