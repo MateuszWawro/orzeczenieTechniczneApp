@@ -26,3 +26,16 @@ class Orzeczenie(db.Model):
     amortyzacja = db.Column(db.String())
     num_fab = db.Column(db.String())
     opis = db.Column(db.String())
+
+#model bazy danych protokołów
+class Awaria(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    urzadz_miejsc = db.Column(db.String())
+    opis = db.Column(db.String())
+    straty = db.Column(db.String())
+    zalecenia = db.Column(db.String())
+    koszt_szac = db.Column(db.String())
+    cz_1_kom = db.Column(db.String())
+    cz_2_kom = db.Column(db.String())
+    stanowisko = db.Column(db.String)
+

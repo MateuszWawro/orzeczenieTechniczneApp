@@ -1,7 +1,7 @@
 from flask import render_template, flash, url_for, request, redirect
 from flask_login import login_user, logout_user, current_user, login_required
 from sqlalchemy.exc import DBAPIError
-from .forms import NewPredicate, LoginForm
+from .forms import NewPredicate, LoginForm, AwariaForm
 from .models import User, Orzeczenie
 from app import app, db, lm
 from .report_generate import create_report, generate_report
@@ -92,3 +92,47 @@ def view_generate(id):
                                                                  str(lista_orzecz.num_inw).replace('/', '#'),
                                                                  datetime.date.today().year), as_attachment=True,
                      mimetype='application/vnd.ms-excel')
+
+
+#formularz logowania 2
+@app.route('/login_sec', methods =['GET', 'POST'])
+def view_login_sec():
+    form = LoginForm()
+    if form.validate_on_submit():
+        login = User.query.filter_by(login=form.login.data).first()
+        print(login)
+        if login and bcrypt_sha256.verify(form.password.data, login.password):
+            print('1')
+            login_user(login)
+            print(current_user)
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('form_page_sec'))
+        flash('złe hasło lub login')
+        return redirect(url_for('home_page'))
+    return render_template("login_form.html", title="", form=form)
+
+#generowanie raportu i dodanie do bazy danych
+@login_required
+@app.route('/form_sec',  methods=['GET','POST'])
+def form_page_sec():
+    form = AwariaForm()
+    if form.validate_on_submit():
+        try:
+            q = Awaria ( kom_orz=form.kom_orz.data, komorka=form.komorka.data,
+                       nazwa_urz=form.nazwa_urz.data, typ=form.typ.data, rok=form.rok.data, lata=form.lata.data,
+                       cena=form.cena.data, num_inw=form.num_inw.data, producent=form.producent.data,
+                       amortyzacja=form.amortyzacja.data,
+                       num_fab=form.num_fab.data, opis=form.opis.data)
+            db.session.add(q)
+        except DBAPIError as e:
+            flash(e.detail)
+            db.session.rollback()
+        else:
+            db.session.commit()
+            return send_file(create_report(form=form), download_name='{0}#{3}_{1}_{2}.xlsx'.format(form.numer_wniosku.data, form.nazwa_urz.data, str(form.num_inw.data).replace('/', '#'), datetime.date.today().year), as_attachment=True,
+                         mimetype='application/vnd.ms-excel')
+    else:
+        flash(form.errors)
+    return render_template("formularz_awar.html", title="", form=form)
+
+
