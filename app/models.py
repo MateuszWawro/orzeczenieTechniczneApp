@@ -37,5 +37,7 @@ class Awaria(db.Model):
     koszt_szac = db.Column(db.String())
     cz_1_kom = db.Column(db.String())
     cz_2_kom = db.Column(db.String())
-    stanowisko = db.Column(db.String)
+    stanowisko = db.Column(db.String())
+    stanowisko2= db.Column(db.String())
+
 

@@ -4,7 +4,7 @@ from wtforms import StringField, SubmitField, IntegerField, SelectField, Passwor
 
 #klasa formularza orzeczenia
 class NewPredicate (FlaskForm):
-    numer_wniosku = StringField('Numer Wniosku')
+    numer_wniosku = IntegerField('Numer Wniosku')
     kom_orz = StringField('Komórka Organizacyjna',[validators.DataRequired()])
     komorka = StringField('Komórka Zgłaszająca',[validators.DataRequired()])
     nazwa_urz = StringField('Nazwa Urządzenia',[validators.DataRequired()])
@@ -34,6 +34,12 @@ class AwariaForm(FlaskForm):
     straty = StringField()
     zalecenia = StringField()
     koszt_szac = StringField()
-    członek = StringField()
-    stanowisko = SelectField('Wybierz stanowisko', choices=[('kierownik','Kierownik'),('z-ca kierownik','Z-ca Kierownik'),('starszy informatyk','Starszy Informatyk'),('informatyk','Informatyk')])
-
+    czlonek_1 = StringField()
+    czlonek_2 = StringField()
+    stanowisko_1 = SelectField('Wybierz stanowisko',
+                               choices=[('1','Kierownik'),('2','Z-ca kierownika'),
+                                        ('3','Starszy Informatyk'),('4','Informatyk')])
+    stanowisko_2 = SelectField('Wybierz stanowisko',
+                               choices=[('kierownik','Kierownik'),('z-ca kierownika','Z-ca kierownika'),
+                                        ('starszy informatyk','Starszy Informatyk'),('informatyk','Informatyk')])
+    generate = SubmitField('Generuj')

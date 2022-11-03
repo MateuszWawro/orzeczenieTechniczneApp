@@ -30,15 +30,16 @@
                 zalogowano jako {{current_user.login}}
             </div>
         </div>
-        <div class = "form-group"> {{form.urzad_miejsc(placeholder="Tutaj wpisz tekst...", class="form-control")}}</div>
+        <div class = "form-group"> {{form.urzadz_miejsc(placeholder="Tutaj wpisz tekst...", class="form-control")}}</div>
         <div class = "form-group"> {{form.opis_awa(placeholder="Opisz awarię...", class="form-control")}}</div>
         <div class = "form-group"> {{form.straty(placeholder="Czy są jakieś straty ?", class="form-control")}}</div>
         <div class = "form-group"> {{form.zalecenia(placeholder="Wpisz zalecenia :)", class="form-control")}}</div>
         <div class = "form-group"> {{form.koszt_szac(placeholder="Koszt", class="form-control")}}</div>
-        <div class = "form-group"> {{form.członek(placeholder="członek komisji 1", class="form-control")}}</div>
-        <div class = "form-group"> {{form.stanowisko(placeholder="stanowisko", class="form-control")}}</div>
-        <div class = "form-group"> {{form.członek(placeholder="członek komisji 2", class="form-control")}}</div>
-        <div class = "form-group"> {{form.stanowisko(placeholder="stanowisko", class="form-control")}}</div>
+        <div class = "form-group"> {{form.czlonek_1(placeholder="członek komisji 1", class="form-control")}}</div>
+        <div class = "form-group"> {{form.stanowisko_1(placeholder="stanowisko", class="form-control")}}</div>
+        <div class = "form-group"> {{form.czlonek_2(placeholder="członek komisji 2", class="form-control")}}</div>
+        <div class = "form-group"> {{form.stanowisko_2(placeholder="stanowisko", class="form-control")}}</div>
+        <div class = "form-group"> {{form.generate(class="btn btn-success")}}</div>
     </form>
 </div>
 
