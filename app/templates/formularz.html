@@ -10,7 +10,7 @@
 <body>
 <!-- formularz własciwy -->
 <div class = "row">
-    <form class = "col-lg-6 offset-lg-3 " method="post">
+    <form class = "col-lg-6 offset-lg-3" method="post">
         {{form.csrf_token}}
         <div>
             <h1>
@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class = "form-group"> {{form.numer_wniosku(placeholder='Numer Wniosku (nr)', value='{{i.id}}', class="form-control")}}</div>
+        <div class = "form-group"> {{form.numer_wniosku(placeholder='Numer Wniosku (nr)',value='{{max_numer}}', class="form-control")}}</div>
         <div class = "form-group"> {{form.komorka(placeholder="Miejsce użytkowania", class="form-control")}}</div>
         <div class = "form-group"> {{form.kom_orz(placeholder="Zleceniodawca", class="form-control")}}</div>
         <div class = "form-group"> {{form.nazwa_urz(placeholder="nazwa urządzenia", class="form-control")}}</div>
