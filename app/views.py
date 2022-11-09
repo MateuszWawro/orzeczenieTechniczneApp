@@ -114,25 +114,24 @@ def view_login_sec():
 
 #generowanie raportu i dodanie do bazy danych
 @login_required
-@app.route('/form_sec',  methods=['GET','POST'])
+@app.route('/form_sec',  methods=['GET', 'POST'])
 def form_page_sec():
-    form = AwariaForm()
-    if form.validate_on_submit():
+    awaria_form = AwariaForm()
+    if awaria_form.validate_on_submit():
         try:
-            q = Awaria( urzadz_miejsc=form.urzadz_miejsc.data, opis=form.opis_awa.data,
-                       straty=form.straty.data, zalecenia=form.zalecenia.data, koszt_szac=form.koszt_szac.data,
-                         cz_1_kom=form.czlonek_1.data,
-                       cz_2_kom=form.czlonek_2.data, stanowisko=form.stanowisko_1.data, stanowisko2=form.stanowisko_2.data)
+            q = Awaria(urzadz_miejsc=awaria_form.urzadz_miejsc.data, opis=awaria_form.opis_awa.data,
+                       straty=awaria_form.straty.data, zalecenia=awaria_form.zalecenia.data, koszt_szac=awaria_form.koszt_szac.data,
+                       cz_1_kom=awaria_form.czlonek_1.data,
+                       cz_2_kom=awaria_form.czlonek_2.data, stanowisko=awaria_form.stanowisko_1.data, stanowisko2=awaria_form.stanowisko_2.data)
             db.session.add(q)
         except DBAPIError as e:
             flash(e.detail)
             db.session.rollback()
         else:
             db.session.commit()
-            return send_file(create_awaria_rep(form=form), download_name='{1}.xlsx'.format(form.urzadz_miejsc.data, datetime.date.today().year), as_attachment=True,
-                         mimetype='application/vnd.ms-excel')
+            return send_file(create_awaria_rep(awaria_form=awaria_form), download_name='{1}.xlsx'.format(awaria_form.urzadz_miejsc.data, datetime.date.today().year), as_attachment=True, mimetype='application/vnd.ms-excel')
     else:
-        flash(form.errors)
-    return render_template("formularz_awar.html", title="", form=form)
+        flash(awaria_form.errors)
+    return render_template("formularz_awar.html", title="", awaria_form=awaria_form)
 
 
