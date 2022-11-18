@@ -4,6 +4,8 @@ import xlsxwriter
 from flask_login import current_user
 from xlsxwriter import workbook
 
+import app
+
 
 def create_awaria_rep(awaria_form=None):
 
@@ -100,7 +102,7 @@ def create_awaria_rep(awaria_form=None):
 
 #lewa strona tytuł
     worksheet.merge_range('A1:D1', 'Sekcja Informatyki i Telekomunikacji', merge_general_left_2)
-    worksheet.merge_range('A2:C2', 'Wojewódzki Szpital Zespolony', center)
+    worksheet.insert_image('E1', '{0}\\{1}'.format(app.app.root_path,'szpital.png'), {'x_scale': 0.5, 'y_scale': 0.5})
     worksheet.merge_range('C3:D3', 'Protokół Awaryjny', merge_general_bold)
     worksheet.merge_range('A4:B4','Elbląg', data_v)
     worksheet.merge_range('C4:D4','dnia', data_v)
@@ -148,7 +150,7 @@ def create_awaria_rep(awaria_form=None):
 
 #prawa strona tytuł
     worksheet.merge_range('H1:K1', 'Sekcja Informatyki i Telekomunikacji', merge_general_left_2)
-    worksheet.merge_range('H2:J2', 'Wojewódzki Szpital Zespolony', center)
+    #obrazek
     worksheet.merge_range('J3:K3', 'Protokół Awaryjny', merge_general_bold)
     worksheet.write('H4', 'data', center)
     worksheet.write('I4', '{0}'.format(datetime.date.today()))
