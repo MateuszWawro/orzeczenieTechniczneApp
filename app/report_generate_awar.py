@@ -66,9 +66,9 @@ def create_awaria_rep(awaria_form=None):
     merge_general_left.set_font_size(8)
     merge_general_left.set_font_name('Tahoma')
 
-    merge_general_left_2 = workbook.add_format({'align': 'left'})
-    merge_general_left_2.set_font_size(10)
-    merge_general_left_2.set_font_name('Tahoma')
+    merge_center = workbook.add_format({'align': 'center', 'bold': True})
+    merge_center.set_font_size(8)
+    merge_center.set_font_name('Tahoma')
 
     merge_general = workbook.add_format({'align': 'center'})
     merge_general.set_font_size(10)
@@ -82,9 +82,9 @@ def create_awaria_rep(awaria_form=None):
     center.set_font_size(10)
     center.set_font_name('Tahoma')
 
-    data_v = workbook.add_format({'bold': True})
+    data_v = workbook.add_format({'italic': True , 'bold': True})
     data_v.set_align('center')
-    data_v.set_font_size(9)
+    data_v.set_font_size(8)
     data_v.set_font_name('Tahoma')
 
 #stworzenie arkusza w pliku xlsx i definicja ustawien
@@ -101,12 +101,10 @@ def create_awaria_rep(awaria_form=None):
     worksheet.center_horizontally()
 
 #lewa strona tytuł
-    worksheet.merge_range('A1:D1', 'Sekcja Informatyki i Telekomunikacji', merge_general_left_2)
-    worksheet.insert_image('E1', '{0}\\{1}'.format(app.app.root_path,'szpital.png'), {'x_scale': 0.5, 'y_scale': 0.5})
-    worksheet.merge_range('C3:D3', 'Protokół Awaryjny', merge_general_bold)
-    worksheet.merge_range('A4:B4','Elbląg', data_v)
-    worksheet.merge_range('C4:D4','dnia', data_v)
-    worksheet.merge_range('E4:F4', '{0}'.format(datetime.date.today()), data_v)
+    worksheet.merge_range('B1:E1', 'Sekcja Informatyki i Telekomunikacji', merge_center)
+    worksheet.insert_image('A1', '{0}\\{1}'.format(app.app.root_path,'szpital.png'), {'x_scale': 0.4, 'y_scale': 0.4})
+    worksheet.merge_range('C4:D4', 'Protokół Awaryjny', merge_general_bold)
+    worksheet.merge_range('E2:F2', 'Elbląg, dn. {0}'.format(datetime.date.today()), data_v)
 
 #lewa strona formularz własciwy
     worksheet.merge_range('A6:F6', 'Urządzenie, które uległo awarii, miejsce użytkowania', merge_general_left)
@@ -149,7 +147,7 @@ def create_awaria_rep(awaria_form=None):
 
 
 #prawa strona tytuł
-    worksheet.merge_range('H1:K1', 'Sekcja Informatyki i Telekomunikacji', merge_general_left_2)
+    worksheet.merge_range('H1:K1', 'Sekcja Informatyki i Telekomunikacji', merge_center)
     #obrazek
     worksheet.merge_range('J3:K3', 'Protokół Awaryjny', merge_general_bold)
     worksheet.write('H4', 'data', center)
