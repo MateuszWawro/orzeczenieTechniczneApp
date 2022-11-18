@@ -37,8 +37,8 @@ class AwariaForm(FlaskForm):
     czlonek_1 = StringField()
     czlonek_2 = StringField()
     stanowisko_1 = SelectField('Wybierz stanowisko',
-                               choices=[('1','Kierownik'),('2','Z-ca kierownika'),
-                                        ('3','Starszy Informatyk'),('4','Informatyk')])
+                               choices=[('kierownik','Kierownik'),('z-ca kierownika','Z-ca kierownika'),
+                                        ('starszy informatyk','Starszy Informatyk'),('informatyk','Informatyk')])
     stanowisko_2 = SelectField('Wybierz stanowisko',
                                choices=[('kierownik','Kierownik'),('z-ca kierownika','Z-ca kierownika'),
                                         ('starszy informatyk','Starszy Informatyk'),('informatyk','Informatyk')])
