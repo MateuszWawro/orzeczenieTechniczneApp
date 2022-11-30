@@ -5,7 +5,7 @@ from .forms import NewPredicate, LoginForm, AwariaForm
 from .models import User, Orzeczenie, Awaria
 from app import app, db, lm
 from .report_generate import create_report, generate_report
-from .report_generate_awar import create_awaria_rep
+from .report_generate_awar import create_awaria_rep, generate_report_sec
 from flask import send_file
 import datetime
 from passlib.hash import bcrypt_sha256
@@ -82,6 +82,13 @@ def view_lista():
     lista_orzecz = Orzeczenie.query.all()
     return render_template("lista_orzeczen.html", title="Lista Orzeczeń - zalogowano jako:{0}".format(current_user.name), lista_orzecz=lista_orzecz)
 
+#lista protokołów
+@login_required
+@app.route('/lista_prot')
+def view_lista_sec():
+    lista_prot = Awaria.query.all()
+    return render_template("lista_orzeczen_awar.html", title="Lista Protokołów Awaryjnych - zalogowano jako:{0}".format(current_user.name), lista_prot=lista_prot)
+
 
 #generacja/podglad z listy
 @login_required
@@ -93,6 +100,15 @@ def view_generate(id):
                                                                  str(lista_orzecz.num_inw).replace('/', '#'),
                                                                  datetime.date.today().year), as_attachment=True,
                      mimetype='application/vnd.ms-excel')
+
+
+#generacja/podglad z listy awaryjny protokol
+@login_required
+@app.route("/generate_sec/<int:id>", methods=["POST", "GET"])
+def view_generate_sec(id):
+    lista_prot = Awaria.query.filter_by(id=id).first()
+    return send_file(generate_report_sec(lista_query_sec=lista_prot),
+                     download_name='{0}_{1}.xlsx'.format(lista_prot.urzadz_miejsc, datetime.date.today()), as_attachment=True, mimetype='application/vnd.ms-excel')
 
 
 #formularz logowania 2
