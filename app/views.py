@@ -129,7 +129,7 @@ def form_page_sec():
             db.session.rollback()
         else:
             db.session.commit()
-            return send_file(create_awaria_rep(awaria_form=awaria_form), download_name='{1}.xlsx'.format(awaria_form.urzadz_miejsc.data, datetime.date.today().year), as_attachment=True, mimetype='application/vnd.ms-excel')
+            return send_file(create_awaria_rep(awaria_form=awaria_form), download_name='{0}_{1}.xlsx'.format(awaria_form.urzadz_miejsc.data, datetime.date.today()), as_attachment=True, mimetype='application/vnd.ms-excel')
     else:
         flash(awaria_form.errors)
     return render_template("formularz_awar.html", title="", awaria_form=awaria_form)

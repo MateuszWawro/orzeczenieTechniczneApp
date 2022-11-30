@@ -16,7 +16,11 @@ def create_awaria_rep(awaria_form=None):
 
 #cell definitions
 
-
+    footer = workbook.add_format()
+    footer.set_font_size(4)
+    footer.set_align('left')
+    footer.set_align('bottom')
+    footer.set_font_name('Courier New')
 
     brutto = workbook.add_format()
     brutto.set_align('left')
@@ -188,6 +192,13 @@ def create_awaria_rep(awaria_form=None):
     worksheet.write('J31', 'Uwagi:', uwagi)
     worksheet.merge_range('N37:P37', '..............................................', bold)
     worksheet.merge_range('N38:P38', 'Dyrektor ds. Techniczno - Eksploatacyjnych', dyr)
+
+    worksheet.merge_range('A38:D38',
+                          'Wygenerowano dnia {0} przez {1} {2}'.format(datetime.date.today(), current_user.name,
+                                                                       current_user.surname), footer)
+    worksheet.merge_range('J38:M38',
+                          'Wygenerowano dnia {0} przez {1} {2}'.format(datetime.date.today(), current_user.name,
+                                                                       current_user.surname), footer)
 
     workbook.close()
     output.seek(0)
