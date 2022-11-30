@@ -3,6 +3,8 @@ import datetime
 import xlsxwriter
 from flask_login import current_user
 
+import app
+
 
 def create_report(form=None):
 
@@ -58,14 +60,17 @@ def create_report(form=None):
 #stworzenie arkusza w pliku xlsx i definicja ustawien
    worksheet = workbook.add_worksheet()
    worksheet.set_landscape()
-   worksheet.set_margins(left=0.25, right=0.25)
+   worksheet.set_margins(left=0.25, right=0.25, top=0, bottom=0)
    worksheet.set_column('G1:G1', 1)
    worksheet.print_area('A1:M33')
+   worksheet.set_row(29, 41.25)
+   worksheet.set_row(19, 58.50)
    worksheet.set_paper(9)
    worksheet.center_horizontally()
 
 #stworzenie prezentacji danych na arkuszu
 #lewa strona tytuł
+   worksheet.insert_image('A1', '{0}\\{1}'.format(app.app.root_path, 'szpital.png'), {'x_scale': 0.2, 'y_scale': 0.2})
    worksheet.merge_range('C1:E1', 'Wojewódzki Szpital Zespolony', merge_general)
    worksheet.merge_range('C3:E3', 'ORZECZENIE TECHNICZNE', merge_bold)
 
@@ -74,6 +79,7 @@ def create_report(form=None):
    worksheet.merge_range('C5:F5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
 
 #prawa strona tytuł
+   worksheet.insert_image('H1', '{0}\\{1}'.format(app.app.root_path, 'szpital.png'), {'x_scale': 0.2, 'y_scale': 0.2})
    worksheet.merge_range('J1:L1', 'Wojewódzki Szpital Zespolony', merge_general)
    worksheet.merge_range('J3:L3', 'ORZECZENIE TECHNICZNE', merge_bold)
 
