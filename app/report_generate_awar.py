@@ -311,19 +311,19 @@ def generate_report_sec(lista_query_sec=None):
     worksheet.merge_range('E2:G2', 'Elbląg, dn. {0}'.format(datetime.date.today()), data_v)
 
 #lewa strona formularz własciwy
-    worksheet.merge_range('A5:G5', 'Urządzenie, które uległo awarii, miejsce użytkowania', merge_general_left)
+    worksheet.merge_range('A5:G5', 'Urządzenie, które uległo awarii, miejsce użytkowania:', merge_general_left)
     worksheet.merge_range('A6:G6', lista_query_sec.urzadz_miejsc, merge_all_border)
 
-    worksheet.merge_range('A7:B7', 'Opis Awarii', merge_general_left)
+    worksheet.merge_range('A7:B7', 'Opis Awarii:', merge_general_left)
     worksheet.merge_range('A8:G11', lista_query_sec.opis, merge_format)
 
-    worksheet.merge_range('A12:G12', 'Przewidywane zwiększenie strat w przypadku nie podjęcia dzialań naprawczych', merge_general_left)
+    worksheet.merge_range('A12:G12', 'Przewidywane zwiększenie strat w przypadku nie podjęcia dzialań naprawczych:', merge_general_left)
     worksheet.merge_range('A13:G14', lista_query_sec.straty, merge_format)
 
-    worksheet.merge_range('A15:D15', 'Zalecenia komisji', merge_general_left)
+    worksheet.merge_range('A15:D15', 'Zalecenia komisji:', merge_general_left)
     worksheet.merge_range('A16:G19', lista_query_sec.zalecenia, merge_format)
 
-    worksheet.merge_range('A21:C21', 'koszt szacunkowy naprawy', koszt)
+    worksheet.merge_range('A21:C21', 'koszt szacunkowy naprawy:', koszt)
     worksheet.merge_range('D21:E21', lista_query_sec.koszt_szac, dotborder)
 
     worksheet.write('F21', 'brutto', brutto)
@@ -356,20 +356,20 @@ def generate_report_sec(lista_query_sec=None):
     worksheet.merge_range('N2:P2', 'Elbląg, dn. {0}'.format(datetime.date.today()), data_v)
 
 # prawa strona formularz własciwy
-    worksheet.merge_range('J5:P5', 'Urządzenie, które uległo awarii, miejsce użytkowania', merge_general_left)
+    worksheet.merge_range('J5:P5', 'Urządzenie, które uległo awarii, miejsce użytkowania:', merge_general_left)
     worksheet.merge_range('J6:P6', lista_query_sec.urzadz_miejsc, merge_all_border)
 
     worksheet.merge_range('J7:P7', 'Opis Awarii', merge_general_left)
     worksheet.merge_range('J8:P11', lista_query_sec.opis, merge_format)
 
-    worksheet.merge_range('J12:P12', 'Przewidywane zwiększenie strat w przypadku nie podjęcia dzialań naprawczych',
+    worksheet.merge_range('J12:P12', 'Przewidywane zwiększenie strat w przypadku nie podjęcia dzialań naprawczych:',
                           merge_general_left)
     worksheet.merge_range('J13:P14', lista_query_sec.straty, merge_format)
 
-    worksheet.merge_range('J15:P15', 'Zalecenia komisji ', merge_general_left)
+    worksheet.merge_range('J15:P15', 'Zalecenia komisji:', merge_general_left)
     worksheet.merge_range('J16:P19', lista_query_sec.zalecenia, merge_format)
 
-    worksheet.merge_range('J21:L21', 'koszt szacunkowy naprawy', koszt)
+    worksheet.merge_range('J21:L21', 'koszt szacunkowy naprawy:', koszt)
     worksheet.merge_range('M21:N21', lista_query_sec.koszt_szac, dotborder)
 
     worksheet.write('O21', 'brutto', brutto)
