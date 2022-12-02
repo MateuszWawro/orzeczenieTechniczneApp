@@ -23,7 +23,13 @@ def home_page():
 @app.route('/form',  methods=['GET','POST'])
 def form_page():
     form = NewPredicate()
-    max_numer = db.session.query(func.max(Orzeczenie.id))
+    o = Orzeczenie.query.all()
+    z = list()
+    for i in o:
+        z.append(i.id)
+    z.sort()
+    max_nr_orz = [int(x) for x in z[-1:]]
+    form.numer_wniosku.data = max_nr_orz[0]+1
     if form.validate_on_submit():
         try:
             q = Orzeczenie(id=form.numer_wniosku.data, kom_orz=form.kom_orz.data, komorka=form.komorka.data,
@@ -41,7 +47,7 @@ def form_page():
                          mimetype='application/vnd.ms-excel')
     else:
         flash(form.errors)
-    return render_template("formularz.html", title="", form=form, max_numer=max_numer)
+    return render_template("formularz.html", title="", form=form)
 
 
 #formularz logowania
