@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, validators, DecimalField, TextAreaField
-
+from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, TextAreaField
+from wtforms import validators
 
 #klasa formularza orzeczenia
 class NewPredicate (FlaskForm):
@@ -29,7 +29,7 @@ class LoginForm(FlaskForm):
 
 #klasa formularza protokołu
 class AwariaForm(FlaskForm):
-    urzadz_miejsc = StringField()
+    urzadz_miejsc = StringField('Urzadzenie', [validators.Length(min=10 ,max=73)])
     opis_awa = TextAreaField()
     straty = StringField()
     zalecenia = StringField()
