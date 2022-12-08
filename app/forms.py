@@ -43,4 +43,4 @@ class AwariaForm(FlaskForm):
     stanowisko_2 = SelectField('Wybierz stanowisko',
                                choices=[('kierownik','Kierownik'),('z-ca kierownika','Z-ca kierownika'),
                                         ('starszy informatyk','Starszy Informatyk'),('informatyk','Informatyk')])
-    generate = SubmitField('Generuj.')
+    generate = SubmitField('Generuj')
