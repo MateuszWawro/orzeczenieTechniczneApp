@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, TextAreaField
+from wtforms import StringField, SubmitField, IntegerField, SelectField, PasswordField, TextAreaField, DateField
 from wtforms import validators
 
 #klasa formularza orzeczenia
@@ -27,10 +27,11 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Zaloguj')
 
 
-#klasa formularza protokołu
+#klasa formularza protokołu.
 class AwariaForm(FlaskForm):
     urzadz_miejsc = StringField('Urzadzenie', [validators.Length(min=10 ,max=73)])
     opis_awa = TextAreaField()
+    date = DateField()
     straty = StringField()
     zalecenia = StringField()
     koszt_szac = StringField()

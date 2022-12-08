@@ -18,10 +18,13 @@
             <thead>
             <tr>
                 <th>
-                    numer
+                    Numer
                 </th>
                 <th>
-                    nazwa urządzenia i miejsce
+                    Nazwa urządzenia i miejsce
+                </th>
+                <th>
+                    Data wygenerowania
                 </th>
                 <th>
                     Akcja
@@ -33,6 +36,7 @@
             <tr>
                 <td>{{i.id}}</td>
                 <td>{{i.urzadz_miejsc}}</td>
+                <td>{{i.date}}</td>
                 <td> <a href="/generate_sec/{{i.id}}" class="btn btn-outline-success btn-sm" role="button" aria-pressed="true">Generuj Orzeczenie</a></td>
             </tr>
             {% endfor %}

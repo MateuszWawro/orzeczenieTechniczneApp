@@ -288,6 +288,7 @@ def generate_report_sec(lista_query_sec=None):
     data_v.set_align('right')
     data_v.set_font_size(8)
     data_v.set_font_name('Tahoma')
+    data_v.set_num_format(14)
 
 #stworzenie arkusza w pliku xlsx i definicja ustawien
     worksheet = workbook.add_worksheet()
@@ -308,7 +309,7 @@ def generate_report_sec(lista_query_sec=None):
     worksheet.merge_range('B1:E1', 'Sekcja Informatyki i Telekomunikacji', merge_center)
     worksheet.insert_image('A1', '{0}\\{1}'.format(app.app.root_path,'szpital.png'), {'x_scale': 0.2, 'y_scale': 0.2})
     worksheet.merge_range('C3:E3', 'Protokół Awaryjny', merge_general_bold)
-    worksheet.merge_range('E2:G2', 'Elbląg, dn. {0}'.format(datetime.date.today()), data_v)
+    worksheet.merge_range('F2:G2', lista_query_sec.date, data_v)
 
 #lewa strona formularz własciwy
     worksheet.merge_range('A5:G5', 'Urządzenie, które uległo awarii, miejsce użytkowania:', merge_general_left)
@@ -353,7 +354,7 @@ def generate_report_sec(lista_query_sec=None):
     worksheet.merge_range('K1:N1', 'Sekcja Informatyki i Telekomunikacji', merge_center)
     worksheet.insert_image('J1', '{0}\\{1}'.format(app.app.root_path, 'szpital.png'), {'x_scale': 0.2, 'y_scale': 0.2})
     worksheet.merge_range('L3:N3', 'Protokół Awaryjny', merge_general_bold)
-    worksheet.merge_range('N2:P2', 'Elbląg, dn. {0}'.format(datetime.date.today()), data_v)
+    worksheet.merge_range('N2:P2',  lista_query_sec.date, data_v)
 
 # prawa strona formularz własciwy
     worksheet.merge_range('J5:P5', 'Urządzenie, które uległo awarii, miejsce użytkowania:', merge_general_left)

@@ -1,6 +1,7 @@
 from . import db
-from sqlalchemy import String
+from sqlalchemy import String, Date
 from flask_login import UserMixin
+
 
 #model bazy danych użytkowników
 class User (db.Model, UserMixin):
@@ -39,5 +40,6 @@ class Awaria(db.Model):
     cz_2_kom = db.Column(db.String())
     stanowisko = db.Column(db.String())
     stanowisko2= db.Column(db.String())
+    date = db.Column(db.Date())
 
 

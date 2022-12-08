@@ -114,7 +114,7 @@ def view_generate(id):
 def view_generate_sec(id):
     lista_prot = Awaria.query.filter_by(id=id).first()
     return send_file(generate_report_sec(lista_query_sec=lista_prot),
-                     download_name='{0}_{1}.xlsx'.format(lista_prot.urzadz_miejsc, datetime.date.today()), as_attachment=True, mimetype='application/vnd.ms-excel')
+                     download_name='{0}.xlsx'.format(lista_prot.urzadz_miejsc), as_attachment=True, mimetype='application/vnd.ms-excel')
 
 
 #formularz logowania 2
@@ -144,7 +144,7 @@ def form_page_sec():
             q = Awaria(urzadz_miejsc=awaria_form.urzadz_miejsc.data, opis=awaria_form.opis_awa.data,
                        straty=awaria_form.straty.data, zalecenia=awaria_form.zalecenia.data, koszt_szac=awaria_form.koszt_szac.data,
                        cz_1_kom=awaria_form.czlonek_1.data,
-                       cz_2_kom=awaria_form.czlonek_2.data, stanowisko=awaria_form.stanowisko_1.data, stanowisko2=awaria_form.stanowisko_2.data)
+                       cz_2_kom=awaria_form.czlonek_2.data, stanowisko=awaria_form.stanowisko_1.data, stanowisko2=awaria_form.stanowisko_2.data, date=awaria_form.date.data)
             db.session.add(q)
         except DBAPIError as e:
             flash(e.detail)
