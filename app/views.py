@@ -36,7 +36,7 @@ def form_page():
                        nazwa_urz=form.nazwa_urz.data, typ=form.typ.data, rok=form.rok.data, lata=form.lata.data,
                        cena=form.cena.data, num_inw=form.num_inw.data, producent=form.producent.data,
                        amortyzacja=form.amortyzacja.data,
-                       num_fab=form.num_fab.data, opis=form.opis.data)
+                       num_fab=form.num_fab.data, opis=form.opis.data , date_1=form.date_1.data, rok_biez=form.rok_biez.data)
             db.session.add(q)
         except DBAPIError as e:
             flash(e.detail)

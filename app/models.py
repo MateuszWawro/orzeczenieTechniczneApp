@@ -15,6 +15,7 @@ class User (db.Model, UserMixin):
 #model bazy danych orzeczeń
 class Orzeczenie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    rok_biez = db.Column(db.Integer())
     kom_orz = db.Column(db.String())
     komorka = db.Column(db.String())
     nazwa_urz = db.Column(db.String())
@@ -27,6 +28,7 @@ class Orzeczenie(db.Model):
     amortyzacja = db.Column(db.String())
     num_fab = db.Column(db.String())
     opis = db.Column(db.String())
+    date_1 = db.Column(db.Date())
 
 #model bazy danych protokołów
 class Awaria(db.Model):

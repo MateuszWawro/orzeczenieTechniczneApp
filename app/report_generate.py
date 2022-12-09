@@ -233,6 +233,10 @@ def generate_report(lista_query=None):
    merge_general.set_font_size(11.5)
    merge_general.set_font_name('Tahoma')
 
+   merge_general_num = workbook.add_format({'align':'center'})
+   merge_general_num.set_font_size(11.5)
+   merge_general_num.set_num_format(14)
+
    merge_format = workbook.add_format({'align':'left','border': True})
    merge_format.set_font_size(10)
    merge_format.set_font_name('Tahoma')
@@ -263,7 +267,7 @@ def generate_report(lista_query=None):
 
    worksheet.write('A5', 'nr', right)
    worksheet.write('B5', '{0}/{1}'.format(lista_query.id, datetime.date.today().year), center)
-   worksheet.merge_range('C5:F5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
+   worksheet.merge_range('C5:F5',  lista_query.date_1, merge_general_num)
 
 #prawa strona tytuł
    worksheet.merge_range('J1:L1', 'Wojewódzki Szpital Zespolony', merge_general)
@@ -271,7 +275,7 @@ def generate_report(lista_query=None):
 
    worksheet.write('H5', 'nr', right)
    worksheet.write('I5', '{0}/{1}'.format(lista_query.id, datetime.date.today().year), center)
-   worksheet.merge_range('J5:M5', 'Wystawione dnia {0}'.format(datetime.date.today()), merge_general)
+   worksheet.merge_range('J5:M5',  lista_query.date_1, merge_general_num)
 
 #lewa strona dane (1 zestaw tabel)
    worksheet.merge_range('A7:B7', 'Zleceniodawca' ,merge_format,)

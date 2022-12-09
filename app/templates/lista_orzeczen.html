@@ -18,13 +18,16 @@
             <thead>
             <tr>
                 <th>
-                    numer wniosku
+                    Numer wniosku
                 </th>
                 <th>
-                    nazwa urządzenia
+                    Nazwa urządzenia
                 </th>
                 <th>
-                    numer inwentarzowy
+                    Numer inwentarzowy
+                </th>
+                <th>
+                    Data wygenerowania
                 </th>
                 <th>
                     Akcja
@@ -37,6 +40,7 @@
                 <td>{{i.id}}/2022</td>
                 <td>{{i.nazwa_urz}}</td>
                 <td>{{i.num_inw}}</td>
+                <td>{{i.date_1}}</td>
                 <td> <a href="/generate/{{i.id}}" class="btn btn-outline-success btn-sm" role="button" aria-pressed="true">Generuj Orzeczenie</a></td>
             </tr>
             {% endfor %}

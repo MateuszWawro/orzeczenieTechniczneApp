@@ -19,7 +19,11 @@
             <div class = "d-flex flex-row"> <a href="{{url_for('view_lista')}}"
                                               class = "btn btn-primary btn-lg active"
                                               role="button" aria-pressed="true"> Lista orzeczeń</a>
-                </div>
+            </div>
+            <span> Data wystawienia: </span>
+            <div class="d-flex flex-row">
+                <div class = "form-group"> {{form.date_1(placeholder="data", class="form-control")}}</div>
+            </div>
             <div class ="d-flex flex-row-reverse">
                     {% if current_user.is_authenticated %}
                 <a href="{{url_for('view_logout')}}" class="btn btn-danger" role="button"
@@ -30,8 +34,8 @@
                 zalogowano jako {{current_user.login}}
             </div>
         </div>
-
         <div class = "form-group"> {{form.numer_wniosku(placeholder='Numer Wniosku (nr)', class="form-control")}}</div>
+        <div class = "form-group"> {{form.rok_biez(placeholder='Rok', class="form-control", value="2022")}}</div>
         <div class = "form-group"> {{form.komorka(placeholder="Miejsce użytkowania", class="form-control")}}</div>
         <div class = "form-group"> {{form.kom_orz(placeholder="Zleceniodawca", class="form-control")}}</div>
         <div class = "form-group"> {{form.nazwa_urz(placeholder="nazwa urządzenia", class="form-control")}}</div>

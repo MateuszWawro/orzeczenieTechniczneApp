@@ -5,6 +5,8 @@ from wtforms import validators
 #klasa formularza orzeczenia
 class NewPredicate (FlaskForm):
     numer_wniosku = IntegerField('Numer Wniosku')
+    date_1 = DateField()
+    rok_biez = IntegerField('Rok')
     kom_orz = StringField('Komórka Organizacyjna',[validators.DataRequired()])
     komorka = StringField('Komórka Zgłaszająca',[validators.DataRequired()])
     nazwa_urz = StringField('Nazwa Urządzenia',[validators.DataRequired()])
