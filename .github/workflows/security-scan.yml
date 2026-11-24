@@ -1,0 +1,42 @@
+name: Security scan
+
+on:
+  push:
+    branches: [main, master]
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Trivy - repo scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig
+          severity: HIGH,CRITICAL
+          format: table
+          output: trivy.txt
+          exit-code: "0"
+
+      - name: Wynik
+        run: cat trivy.txt
+
+      - name: Discord - jesli cos znaleziono
+        if: always()
+        env:
+          HOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          if grep -qE 'HIGH|CRITICAL' trivy.txt; then
+            COUNT=$(grep -cE '│ (HIGH|CRITICAL) ' trivy.txt || true)
+            jq -n --arg repo "${{ github.repository }}" \
+                  --arg url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+                  --arg n "$COUNT" \
+              '{username:"Trivy", embeds:[{title:("🛡️ " + $repo + ": " + $n + " podatnosci HIGH/CRITICAL"), url:$url, color:15158332, description:"Kliknij tytul, zeby zobaczyc szczegoly w Actions."}]}' \
+            | curl -sf -H 'Content-Type: application/json' -d @- "$HOOK"
+          fi
